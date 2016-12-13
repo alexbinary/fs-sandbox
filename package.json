@@ -1,0 +1,25 @@
+{
+  "name": "alexbinary.fs-sandbox",
+  "description": "Filesystem sandbox for your fs related tests 📝",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/alexbinary/fs-sandbox.git",
+  "author": "Alexandre Bintz <alexandre@bintz.io>",
+  "license": "MIT",
+  "scripts": {
+    "test": "istanbul cover _mocha",
+    "testw": "mocha -w"
+  },
+  "devDependencies": {
+    "alexbinary.file-exists": "https://github.com/alexbinary/file-exists.git",
+    "chai": "^3.5.0",
+    "chai-string": "^1.3.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.4",
+    "touchp": "^0.1.1"
+  }
+}
