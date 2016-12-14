@@ -30,20 +30,20 @@ describe('fs-sandbox', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
       // ## TEST
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## Assert
       expect(sandbox.fullpath).to.startWith(fsSandbox.getRoot())
       expect(fileexists.sync(sandbox.fullpath)).to.be.true
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('rm', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## Assert
       expect(fileexists.sync(sandbox.fullpath)).to.be.false
       // ## End
@@ -53,125 +53,125 @@ describe('fs-sandbox', function () {
     it('path', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
       let filepath = sandbox.path
       // ## Assert
       expect(filepath).to.startWith('sandbox')
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('fullpath', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
       let filepath = sandbox.fullpath
       // ## Assert
       expect(filepath).to.startWith(fsSandbox.getRoot() + '/sandbox')
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('getPath', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
       let filepath = sandbox.getPath('foo/bar')
       // ## Assert
       expect(filepath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('touchp', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
-      let file = sandbox.touchp('foo/bar')
+      let file = sandbox.touchpSync('foo/bar')
       // ## Assert
       expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
       expect(fileexists.sync(file.fullpath)).to.be.true
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('touchp /', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
-      let file = sandbox.touchp('/foo/bar')
+      let file = sandbox.touchpSync('/foo/bar')
       // ## Assert
       expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
       expect(fileexists.sync(file.fullpath)).to.be.true
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('touchp fullpath', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       let filepath = sandbox.getPath('foo/bar')
       // ## TEST
-      let file = sandbox.touchp(filepath)
+      let file = sandbox.touchpSync(filepath)
       // ## Assert
       expect(file.fullpath).to.equal(path.join(sandbox.fullpath, filepath))
       expect(fileexists.sync(file.fullpath)).to.be.true
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('mkdirp', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
-      let dir = sandbox.mkdirp('foo/bar')
+      let dir = sandbox.mkdirpSync('foo/bar')
       // ## Assert
       expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
       expect(fileexists.sync(dir.fullpath)).to.be.true
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('mkdirp /', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
-      let dir = sandbox.mkdirp('/foo/bar')
+      let dir = sandbox.mkdirpSync('/foo/bar')
       // ## Assert
       expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
       expect(fileexists.sync(dir.fullpath)).to.be.true
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('mkdirp fullpath', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       let filepath = sandbox.getPath('foo/bar')
       // ## TEST
-      let dir = sandbox.mkdirp(filepath)
+      let dir = sandbox.mkdirpSync(filepath)
       // ## Assert
       expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, filepath))
       expect(fileexists.sync(dir.fullpath)).to.be.true
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('rm', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
+      let sandbox = fsSandbox.newSync()
       // ## TEST
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## Assert
       expect(fileexists.sync(sandbox.fullpath)).to.be.false
       // ## End
@@ -181,40 +181,40 @@ describe('fs-sandbox', function () {
     it('path', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
-      let file = sandbox.touchp('foo/bar')
+      let sandbox = fsSandbox.newSync()
+      let file = sandbox.touchpSync('foo/bar')
       // ## TEST
       let filepath = file.path
       // ## Assert
       expect(filepath).to.equal('foo/bar')
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('fullpath', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
-      let file = sandbox.touchp('foo/bar')
+      let sandbox = fsSandbox.newSync()
+      let file = sandbox.touchpSync('foo/bar')
       // ## TEST
       let filepath = file.fullpath
       // ## Assert
       expect(filepath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('rm', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
-      let file = sandbox.touchp('foo/bar')
+      let sandbox = fsSandbox.newSync()
+      let file = sandbox.touchpSync('foo/bar')
       // ## TEST
-      file.rm()
+      file.rmSync()
       // ## Assert
       expect(fileexists.sync(file.fullpath)).to.be.false
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
   })
@@ -222,40 +222,40 @@ describe('fs-sandbox', function () {
     it('path', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
-      let dir = sandbox.mkdirp('foo/bar')
+      let sandbox = fsSandbox.newSync()
+      let dir = sandbox.mkdirpSync('foo/bar')
       // ## TEST
       let filepath = dir.path
       // ## Assert
       expect(filepath).to.equal('foo/bar')
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('fullpath', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
-      let dir = sandbox.mkdirp('foo/bar')
+      let sandbox = fsSandbox.newSync()
+      let dir = sandbox.mkdirpSync('foo/bar')
       // ## TEST
       let filepath = dir.fullpath
       // ## Assert
       expect(filepath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
     it('rm', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
-      let sandbox = fsSandbox.new()
-      let dir = sandbox.mkdirp('foo/bar')
+      let sandbox = fsSandbox.newSync()
+      let dir = sandbox.mkdirpSync('foo/bar')
       // ## TEST
-      dir.rm()
+      dir.rmSync()
       // ## Assert
       expect(fileexists.sync(dir.fullpath)).to.be.false
       // ## Teardown
-      fsSandbox.rm()
+      fsSandbox.rmSync()
       // ## End
     })
   })

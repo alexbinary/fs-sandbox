@@ -14,10 +14,10 @@ module.exports = {
   getRoot: () => {
     return root
   },
-  new: () => {
+  newSync: () => {
     return makeSandboxObject()
   },
-  rm: () => {
+  rmSync: () => {
     rimraf.sync(getSandboxBasePath() + '*')
   }
 }
@@ -30,13 +30,13 @@ function makeSandboxObject () {
     getPath: (filepath) => {
       return path.join(fullpath, filepath)
     },
-    touchp: (filepath) => {
+    touchpSync: (filepath) => {
       return makeFileObject(fullpath, filepath)
     },
-    mkdirp: (filepath) => {
+    mkdirpSync: (filepath) => {
       return makeDirObject(fullpath, filepath)
     },
-    rm: () => {
+    rmSync: () => {
       rimraf.sync(fullpath)
     }
   }
@@ -48,7 +48,7 @@ function makeFileObject (sandboxpath, filepath) {
   return {
     fullpath,
     path: path.relative(sandboxpath, fullpath),
-    rm: () => {
+    rmSync: () => {
       rimraf.sync(fullpath)
     }
   }
@@ -60,7 +60,7 @@ function makeDirObject (sandboxpath, filepath) {
   return {
     fullpath,
     path: path.relative(sandboxpath, fullpath),
-    rm: () => {
+    rmSync: () => {
       rimraf.sync(fullpath)
     }
   }
