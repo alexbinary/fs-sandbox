@@ -9,22 +9,22 @@ let promisify = require('alexbinary.promisify')
 let root = __dirname
 
 let fsSandbox = {
-  setRoot: (folderpath) => {
+  setRoot (folderpath) {
     root = folderpath
   },
-  getRoot: () => {
+  getRoot () {
     return root
   },
-  new: (cb) => {
+  new (cb) {
     makeSandbox(cb)
   },
-  newSync: () => {
+  newSync () {
     return makeSandboxSync()
   },
-  rm: (cb) => {
+  rm (cb) {
     rimraf(getRmGlobablGlob(), cb)
   },
-  rmSync: () => {
+  rmSync () {
     rimraf.sync(getRmGlobablGlob())
   }
 }
@@ -47,25 +47,25 @@ function makeSandboxObject (fullpath) {
   let obj = {
     fullpath,
     path: path.relative(root, fullpath),
-    getPath: (filepath) => {
+    getPath (filepath) {
       return path.join(fullpath, filepath)
     },
-    touchp: (filepath, cb) => {
+    touchp (filepath, cb) {
       return makeFile(fullpath, filepath, cb)
     },
-    touchpSync: (filepath) => {
+    touchpSync (filepath) {
       return makeFileSync(fullpath, filepath)
     },
-    mkdirp: (filepath, cb) => {
+    mkdirp (filepath, cb) {
       return makeDir(fullpath, filepath, cb)
     },
-    mkdirpSync: (filepath) => {
+    mkdirpSync (filepath) {
       return makeDirSync(fullpath, filepath)
     },
-    rm: (cb) => {
+    rm (cb) {
       rimraf(fullpath, cb)
     },
-    rmSync: () => {
+    rmSync () {
       rimraf.sync(fullpath)
     }
   }
@@ -107,10 +107,10 @@ function makeFileObject (sandboxpath, fullpath) {
   let obj = {
     fullpath,
     path: path.relative(sandboxpath, fullpath),
-    rm: (cb) => {
+    rm (cb) {
       rimraf(fullpath, cb)
     },
-    rmSync: () => {
+    rmSync () {
       rimraf.sync(fullpath)
     }
   }
