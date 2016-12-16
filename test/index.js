@@ -10,14 +10,14 @@ let fsSandbox = require('./../src/index')
 
 describe('fs-sandbox', function () {
   describe('module', function () {
-    it('setRoot', function () {
+    it('setRoot()', function () {
       // ## TEST
       fsSandbox.setRoot(__dirname)
       // ## Assert
       expect(fsSandbox.getRoot()).to.equal(__dirname)
       // ## End
     })
-    it('getRoot', function () {
+    it('getRoot()', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
       // ## TEST
@@ -26,7 +26,7 @@ describe('fs-sandbox', function () {
       expect(root).to.equal(__dirname)
       // ## End
     })
-    describe('new', function () {
+    describe('new()', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -68,7 +68,7 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
-    describe('rm', function () {
+    describe('rm()', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -130,7 +130,7 @@ describe('fs-sandbox', function () {
       fsSandbox.rmSync()
       // ## End
     })
-    it('getPath', function () {
+    it('getPath()', function () {
       // ## Setup
       fsSandbox.setRoot(__dirname)
       let sandbox = fsSandbox.newSync()
@@ -142,7 +142,7 @@ describe('fs-sandbox', function () {
       fsSandbox.rmSync()
       // ## End
     })
-    describe('touchp', function () {
+    describe('touchp()', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -187,7 +187,7 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
-    describe('touchp /', function () {
+    describe('touchp() /', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -232,7 +232,7 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
-    describe('touchp fullpath', function () {
+    describe('touchp() fullpath', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -280,7 +280,7 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
-    describe('mkdirp', function () {
+    describe('mkdirp()', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -325,7 +325,7 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
-    describe('mkdirp /', function () {
+    describe('mkdirp() /', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -370,7 +370,7 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
-    describe('mkdirp fullpath', function () {
+    describe('mkdirp() fullpath', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -418,7 +418,7 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
-    describe('rm', function () {
+    describe('rm()', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -482,7 +482,7 @@ describe('fs-sandbox', function () {
       fsSandbox.rmSync()
       // ## End
     })
-    describe('rm', function () {
+    describe('rm()', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
@@ -555,7 +555,7 @@ describe('fs-sandbox', function () {
       fsSandbox.rmSync()
       // ## End
     })
-    describe('rm', function () {
+    describe('rm()', function () {
       it('callback', function (done) {
         // ## Setup
         fsSandbox.setRoot(__dirname)
