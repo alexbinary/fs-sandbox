@@ -46,7 +46,7 @@ describe('fs-sandbox', function () {
         // ## Setup
         fsSandbox.setRoot(__dirname)
         // ## TEST
-        fsSandbox.new().then((sandbox) => {
+        fsSandbox.new().then(sandbox => {
           // ## Assert
           expect(sandbox.fullpath).to.startWith(fsSandbox.getRoot())
           expect(fileexists.sync(sandbox.fullpath)).to.be.true
@@ -74,7 +74,7 @@ describe('fs-sandbox', function () {
         fsSandbox.setRoot(__dirname)
         let sandbox = fsSandbox.newSync()
         // ## TEST
-        fsSandbox.rm((err) => {
+        fsSandbox.rm(err => {
           // ## Assert
           expect(err).to.be.null
           expect(fileexists.sync(sandbox.fullpath)).to.be.false
@@ -164,7 +164,7 @@ describe('fs-sandbox', function () {
         fsSandbox.setRoot(__dirname)
         let sandbox = fsSandbox.newSync()
         // ## TEST
-        sandbox.touchp('foo/bar').then((file) => {
+        sandbox.touchp('foo/bar').then(file => {
           // ## Assert
           expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
           expect(fileexists.sync(file.fullpath)).to.be.true
@@ -209,7 +209,7 @@ describe('fs-sandbox', function () {
         fsSandbox.setRoot(__dirname)
         let sandbox = fsSandbox.newSync()
         // ## TEST
-        sandbox.touchp('/foo/bar').then((file) => {
+        sandbox.touchp('/foo/bar').then(file => {
           // ## Assert
           expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
           expect(fileexists.sync(file.fullpath)).to.be.true
@@ -256,7 +256,7 @@ describe('fs-sandbox', function () {
         let sandbox = fsSandbox.newSync()
         let filepath = sandbox.getPath('foo/bar')
         // ## TEST
-        sandbox.touchp(filepath).then((file) => {
+        sandbox.touchp(filepath).then(file => {
           // ## Assert
           expect(file.fullpath).to.equal(path.join(sandbox.fullpath, filepath))
           expect(fileexists.sync(file.fullpath)).to.be.true
@@ -302,7 +302,7 @@ describe('fs-sandbox', function () {
         fsSandbox.setRoot(__dirname)
         let sandbox = fsSandbox.newSync()
         // ## TEST
-        sandbox.mkdirp('foo/bar').then((dir) => {
+        sandbox.mkdirp('foo/bar').then(dir => {
           // ## Assert
           expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
           expect(fileexists.sync(dir.fullpath)).to.be.true
@@ -347,7 +347,7 @@ describe('fs-sandbox', function () {
         fsSandbox.setRoot(__dirname)
         let sandbox = fsSandbox.newSync()
         // ## TEST
-        sandbox.mkdirp('/foo/bar').then((dir) => {
+        sandbox.mkdirp('/foo/bar').then(dir => {
           // ## Assert
           expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
           expect(fileexists.sync(dir.fullpath)).to.be.true
@@ -394,7 +394,7 @@ describe('fs-sandbox', function () {
         let sandbox = fsSandbox.newSync()
         let filepath = sandbox.getPath('foo/bar')
         // ## TEST
-        sandbox.mkdirp(filepath).then((dir) => {
+        sandbox.mkdirp(filepath).then(dir => {
           // ## Assert
           expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, filepath))
           expect(fileexists.sync(dir.fullpath)).to.be.true
@@ -424,7 +424,7 @@ describe('fs-sandbox', function () {
         fsSandbox.setRoot(__dirname)
         let sandbox = fsSandbox.newSync()
         // ## TEST
-        sandbox.rm((err) => {
+        sandbox.rm(err => {
           // ## Assert
           expect(err).to.be.null
           expect(fileexists.sync(sandbox.fullpath)).to.be.false
@@ -489,7 +489,7 @@ describe('fs-sandbox', function () {
         let sandbox = fsSandbox.newSync()
         let file = sandbox.touchpSync('foo/bar')
         // ## TEST
-        file.rm((err) => {
+        file.rm(err => {
           // ## Assert
           expect(err).to.be.null
           expect(fileexists.sync(file.fullpath)).to.be.false
@@ -562,7 +562,7 @@ describe('fs-sandbox', function () {
         let sandbox = fsSandbox.newSync()
         let dir = sandbox.mkdirpSync('foo/bar')
         // ## TEST
-        dir.rm((err) => {
+        dir.rm(err => {
           // ## Assert
           expect(err).to.be.null
           expect(fileexists.sync(dir.fullpath)).to.be.false
@@ -600,5 +600,8 @@ describe('fs-sandbox', function () {
         // ## End
       })
     })
+  })
+  after(function () {
+    fsSandbox.rmSync()
   })
 })
