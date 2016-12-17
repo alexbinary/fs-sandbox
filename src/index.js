@@ -1,9 +1,11 @@
 
 let fs = require('fs')
 let path = require('path')
+
 let rimraf = require('rimraf')
 let mkdirp = require('mkdirp')
 let touchp = require('touchp')
+
 let promisify = require('alexbinary.promisify')
 
 let root = __dirname
