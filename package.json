@@ -1,7 +1,7 @@
 {
   "name": "alexbinary.fs-sandbox",
   "description": "Filesystem sandbox for your fs related tests 📝",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "src/index.js",
   "repository": "https://github.com/alexbinary/fs-sandbox.git",
   "author": "Alexandre Bintz <alexandre@bintz.io>",
