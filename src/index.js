@@ -30,8 +30,7 @@ let fsSandbox = {
     rimraf.sync(getRmGlobablGlob())
   }
 }
-fsSandbox.new = promisify(null, fsSandbox.new)
-fsSandbox.rm = promisify(null, fsSandbox.rm)
+promisify(fsSandbox, ['new', 'rm'])
 
 function makeSandbox (cb) {
   fs.mkdtemp(getSandboxBasePath(), (err, fullpath) => {
@@ -71,9 +70,7 @@ function makeSandboxObject (fullpath) {
       rimraf.sync(fullpath)
     }
   }
-  obj.touchp = promisify(null, obj.touchp)
-  obj.mkdirp = promisify(null, obj.mkdirp)
-  obj.rm = promisify(null, obj.rm)
+  promisify(obj, ['touchp', 'mkdirp', 'rm'])
   return obj
 }
 
@@ -116,7 +113,7 @@ function makeFileObject (sandboxpath, fullpath) {
       rimraf.sync(fullpath)
     }
   }
-  obj.rm = promisify(null, obj.rm)
+  promisify(obj, ['rm'])
   return obj
 }
 
