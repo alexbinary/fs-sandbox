@@ -53,7 +53,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -91,7 +91,7 @@ describe('fs-sandbox', function () {
           // ## Assert
           expect(fileexists.sync(sandbox.fullpath)).to.be.false
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -171,7 +171,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -216,7 +216,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -263,7 +263,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -309,7 +309,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -354,7 +354,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -401,7 +401,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -441,7 +441,7 @@ describe('fs-sandbox', function () {
           // ## Assert
           expect(fileexists.sync(sandbox.fullpath)).to.be.false
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -511,7 +511,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
@@ -584,7 +584,7 @@ describe('fs-sandbox', function () {
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
-        }).then(done, done)
+        }).then(() => done()).catch(() => done())
       })
       it('sync', function () {
         // ## Setup
