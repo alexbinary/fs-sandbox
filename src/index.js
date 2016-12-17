@@ -1,69 +1,120 @@
 
 let fs = require('fs')
 let path = require('path')
+
 let rimraf = require('rimraf')
 let mkdirp = require('mkdirp')
 let touchp = require('touchp')
 
+let promisify = require('alexbinary.promisify')
+
 let root = __dirname
 
-module.exports = {
-  setRoot: (folderpath) => {
+let fsSandbox = {
+  setRoot (folderpath) {
     root = folderpath
   },
-  getRoot: () => {
+  getRoot () {
     return root
   },
-  new: () => {
-    return makeSandboxObject()
+  new (cb) {
+    makeSandbox(cb)
   },
-  rm: () => {
-    rimraf.sync(getSandboxBasePath() + '*')
+  newSync () {
+    return makeSandboxSync()
+  },
+  rm (cb) {
+    rimraf(getRmGlobablGlob(), cb)
+  },
+  rmSync () {
+    rimraf.sync(getRmGlobablGlob())
   }
 }
+promisify(fsSandbox, ['new', 'rm'])
 
-function makeSandboxObject () {
+function makeSandbox (cb) {
+  fs.mkdtemp(getSandboxBasePath(), (err, fullpath) => {
+    if (err) cb(err)
+    else cb(null, makeSandboxObject(fullpath))
+  })
+}
+
+function makeSandboxSync () {
   let fullpath = fs.mkdtempSync(getSandboxBasePath())
-  return {
+  return makeSandboxObject(fullpath)
+}
+
+function makeSandboxObject (fullpath) {
+  let obj = {
     fullpath,
     path: path.relative(root, fullpath),
-    getPath: (filepath) => {
+    getPath (filepath) {
       return path.join(fullpath, filepath)
     },
-    touchp: (filepath) => {
-      return makeFileObject(fullpath, filepath)
+    touchp (filepath, cb) {
+      return makeFile(fullpath, filepath, cb)
     },
-    mkdirp: (filepath) => {
-      return makeDirObject(fullpath, filepath)
+    touchpSync (filepath) {
+      return makeFileSync(fullpath, filepath)
     },
-    rm: () => {
+    mkdirp (filepath, cb) {
+      return makeDir(fullpath, filepath, cb)
+    },
+    mkdirpSync (filepath) {
+      return makeDirSync(fullpath, filepath)
+    },
+    rm (cb) {
+      rimraf(fullpath, cb)
+    },
+    rmSync () {
       rimraf.sync(fullpath)
     }
   }
+  promisify(obj, ['touchp', 'mkdirp', 'rm'])
+  return obj
 }
 
-function makeFileObject (sandboxpath, filepath) {
+function makeFile (sandboxpath, filepath, cb) {
+  let fullpath = getPathInSandbox(sandboxpath, filepath)
+  touchp(fullpath, (err) => {
+    if (err) cb(err)
+    else cb(null, makeFileObject(sandboxpath, fullpath))
+  })
+}
+
+function makeFileSync (sandboxpath, filepath) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
   touchp.sync(fullpath)
-  return {
-    fullpath,
-    path: path.relative(sandboxpath, fullpath),
-    rm: () => {
-      rimraf.sync(fullpath)
-    }
-  }
+  return makeFileObject(sandboxpath, fullpath)
 }
 
-function makeDirObject (sandboxpath, filepath) {
+function makeDir (sandboxpath, filepath, cb) {
+  let fullpath = getPathInSandbox(sandboxpath, filepath)
+  mkdirp(fullpath, (err) => {
+    if (err) cb(err)
+    else cb(null, makeFileObject(sandboxpath, fullpath))
+  })
+}
+
+function makeDirSync (sandboxpath, filepath) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
   mkdirp.sync(fullpath)
-  return {
+  return makeFileObject(sandboxpath, fullpath)
+}
+
+function makeFileObject (sandboxpath, fullpath) {
+  let obj = {
     fullpath,
     path: path.relative(sandboxpath, fullpath),
-    rm: () => {
+    rm (cb) {
+      rimraf(fullpath, cb)
+    },
+    rmSync () {
       rimraf.sync(fullpath)
     }
   }
+  promisify(obj, ['rm'])
+  return obj
 }
 
 function getSandboxBasePath () {
@@ -73,3 +124,9 @@ function getSandboxBasePath () {
 function getPathInSandbox (sandboxpath, filepath) {
   return path.join(sandboxpath, filepath)
 }
+
+function getRmGlobablGlob () {
+  return getSandboxBasePath() + '*'
+}
+
+module.exports = fsSandbox
