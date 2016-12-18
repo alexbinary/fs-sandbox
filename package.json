@@ -18,9 +18,10 @@
     "mocha": "^3.2.0"
   },
   "dependencies": {
+    "alexbinary.callbackify": "https://github.com/alexbinary/callbackify.git",
+    "alexbinary.mkdirp": "https://github.com/alexbinary/mkdirp.git",
     "alexbinary.promisify": "https://github.com/alexbinary/promisify.git",
-    "mkdirp": "^0.5.1",
-    "rimraf": "^2.5.4",
-    "touchp": "^0.1.1"
+    "alexbinary.rimraf": "https://github.com/alexbinary/rimraf.git",
+    "alexbinary.touchp": "https://github.com/alexbinary/touchp.git"
   }
 }

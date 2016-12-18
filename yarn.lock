@@ -6,15 +6,40 @@ abbrev@1, abbrev@1.0.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
 
+"alexbinary.callbackify@https://github.com/alexbinary/callbackify.git":
+  version "1.0.0"
+  resolved "https://github.com/alexbinary/callbackify.git#80fd6c8b9e6b46a9f829386ad735a7ede46b91d9"
+
 "alexbinary.file-exists@https://github.com/alexbinary/file-exists.git":
-  version "0.1.1"
-  resolved "https://github.com/alexbinary/file-exists.git#6971e47767fadf693b040663725965287d663453"
+  version "1.0.0"
+  resolved "https://github.com/alexbinary/file-exists.git#bac3b143e066c261b3d7e5b99d1e31a562ae1903"
   dependencies:
     alexbinary.promisify "https://github.com/alexbinary/promisify.git"
+
+"alexbinary.mkdirp@https://github.com/alexbinary/mkdirp.git":
+  version "1.0.0"
+  resolved "https://github.com/alexbinary/mkdirp.git#450f58a1c2184b616a76f138c5b23da90f3dec12"
+  dependencies:
+    alexbinary.promisify "https://github.com/alexbinary/promisify.git"
+    mkdirp "^0.5.1"
 
 "alexbinary.promisify@https://github.com/alexbinary/promisify.git":
   version "2.0.0"
   resolved "https://github.com/alexbinary/promisify.git#c309846fa6240793b43670729a14d0cfa2c5d8fa"
+
+"alexbinary.rimraf@https://github.com/alexbinary/rimraf.git":
+  version "1.0.0"
+  resolved "https://github.com/alexbinary/rimraf.git#fcdecd5a58241345bda150340d9e22971887a631"
+  dependencies:
+    alexbinary.promisify "https://github.com/alexbinary/promisify.git"
+    rimraf "^2.5.4"
+
+"alexbinary.touchp@https://github.com/alexbinary/touchp.git":
+  version "1.0.0"
+  resolved "https://github.com/alexbinary/touchp.git#8b061d24c02ef896b4c61d9f80b28602ab4e6716"
+  dependencies:
+    alexbinary.promisify "https://github.com/alexbinary/promisify.git"
+    touchp "^0.1.1"
 
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
@@ -161,7 +186,7 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-glob@7.0.5:
+glob@7.0.5, glob@^7.0.5:
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.0.5.tgz#b4202a69099bbb4d292a7c1b95b6682b67ebdc95"
   dependencies:
@@ -179,17 +204,6 @@ glob@^5.0.15:
     inflight "^1.0.4"
     inherits "2"
     minimatch "2 || 3"
-    once "^1.3.0"
-    path-is-absolute "^1.0.0"
-
-glob@^7.0.5:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
-  dependencies:
-    fs.realpath "^1.0.0"
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "^3.0.2"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
