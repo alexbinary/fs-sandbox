@@ -242,6 +242,106 @@ describe('fs-sandbox', function () {
           // ## End
         })
       })
+      describe('with content', function () {
+        it('callback', function (done) {
+          // ## Setup
+          fsSandbox.setRoot(__dirname)
+          let sandbox = fsSandbox.newSync()
+          // ## TEST
+          sandbox.touchp('foo/bar', 'test', (err, file) => {
+            // ## Assert
+            expect(err).to.be.null
+            expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
+            expect(file.fullpath).to.be.a.file().with.content('test')
+            // ## Teardown
+            fsSandbox.rmSync()
+            // ## End
+            done()
+          })
+        })
+        it('promise', function (done) {
+          // ## Setup
+          fsSandbox.setRoot(__dirname)
+          let sandbox = fsSandbox.newSync()
+          // ## TEST
+          sandbox.touchp('foo/bar', 'test').then((file) => {
+            // ## Assert
+            expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
+            expect(file.fullpath).to.be.a.file().with.content('test')
+            // ## Teardown
+            fsSandbox.rmSync()
+            // ## End
+          }).then(() => done()).catch(done)
+        })
+        it('sync', function () {
+          // ## Setup
+          fsSandbox.setRoot(__dirname)
+          let sandbox = fsSandbox.newSync()
+          // ## TEST
+          let file = sandbox.touchpSync('foo/bar', 'test')
+          // ## Assert
+          expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
+          expect(file.fullpath).to.be.a.file().with.content('test')
+          // ## Teardown
+          fsSandbox.rmSync()
+          // ## End
+        })
+      })
+      describe('with array and content', function () {
+        it('callback', function (done) {
+          // ## Setup
+          fsSandbox.setRoot(__dirname)
+          let sandbox = fsSandbox.newSync()
+          // ## TEST
+          sandbox.touchp(['foo/bar', 'foo/baz'], 'test', (err, files) => {
+            // ## Assert
+            expect(err).to.be.null
+            expect(files).to.be.an('array').with.lengthOf(2)
+            expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
+            expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
+            expect(files[0].fullpath).to.be.a.file().with.content('test')
+            expect(files[1].fullpath).to.be.a.file().with.content('test')
+            // ## Teardown
+            fsSandbox.rmSync()
+            // ## End
+            done()
+          })
+        })
+        it('promise', function (done) {
+          // ## Setup
+          fsSandbox.setRoot(__dirname)
+          let sandbox = fsSandbox.newSync()
+          // ## TEST
+          sandbox.touchp(['foo/bar', 'foo/baz'], 'test').then((files) => {
+            // ## Assert
+            expect(files).to.be.an('array').with.lengthOf(2)
+            expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
+            expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
+            expect(files[0].fullpath).to.be.a.file().with.content('test')
+            expect(files[1].fullpath).to.be.a.file().with.content('test')
+            // ## Teardown
+            fsSandbox.rmSync()
+            // ## End
+          }).then(() => done()).catch(done)
+        })
+        it('sync', function () {
+          // ## Setup
+          fsSandbox.setRoot(__dirname)
+          let sandbox = fsSandbox.newSync()
+          // ## TEST
+          let files = sandbox.touchpSync(['foo/bar', 'foo/baz'], 'test')
+          // ## Assert
+          expect(files).to.be.an('array')
+          expect(files).to.have.lengthOf(2)
+          expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
+          expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
+          expect(files[0].fullpath).to.be.a.file().with.content('test')
+          expect(files[1].fullpath).to.be.a.file().with.content('test')
+          // ## Teardown
+          fsSandbox.rmSync()
+          // ## End
+        })
+      })
     })
     describe('mkdirp()', function () {
       it('callback', function (done) {
