@@ -11,7 +11,8 @@ let touchp = require('alexbinary.touchp')
 let promisify = require('alexbinary.promisify')
 let callbackify = require('alexbinary.callbackify')
 
-promisify(fs, ['mkdtemp'])
+let fsMkdtempPromise = promisify(fs.mkdtemp)
+let fsWriteFilePromise = promisify(fs.writeFile)
 
 let root = __dirname
 
@@ -38,9 +39,8 @@ let fsSandbox = {
 callbackify(fsSandbox, ['new', 'rm'])
 
 function makeSandbox () {
-  return fs.mkdtemp(getSandboxBasePath()).then((fullpath) => {
-    return makeSandboxObject(fullpath)
-  })
+  return fsMkdtempPromise(getSandboxBasePath())
+  .then((fullpath) => makeSandboxObject(fullpath))
 }
 
 function makeSandboxSync () {
@@ -105,7 +105,7 @@ function makeSandboxObject (fullpath) {
 function makeFile (sandboxpath, filepath) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
   return touchp(fullpath)
-  .then(() => promisify(fs.writeFile)(fullpath, getFileContent()))
+  .then(() => fsWriteFilePromise(fullpath, getFileContent()))
   .then(() => makeFileObject(sandboxpath, fullpath))
 }
 
@@ -118,9 +118,8 @@ function makeFileSync (sandboxpath, filepath) {
 
 function makeDir (sandboxpath, filepath) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
-  return mkdirp(fullpath).then(() => {
-    return makeFileObject(sandboxpath, fullpath)
-  })
+  return mkdirp(fullpath)
+  .then(() => makeFileObject(sandboxpath, fullpath))
 }
 
 function makeDirSync (sandboxpath, filepath) {
