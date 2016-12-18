@@ -153,7 +153,7 @@ describe('fs-sandbox', function () {
           // ## Assert
           expect(err).to.be.null
           expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-          expect(file.fullpath).to.be.a.file()
+          expect(file.fullpath).to.be.a.file().and.not.empty
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -168,7 +168,7 @@ describe('fs-sandbox', function () {
         sandbox.touchp('foo/bar').then((file) => {
           // ## Assert
           expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-          expect(file.fullpath).to.be.a.file()
+          expect(file.fullpath).to.be.a.file().and.not.empty
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -182,7 +182,7 @@ describe('fs-sandbox', function () {
         let file = sandbox.touchpSync('foo/bar')
         // ## Assert
         expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-        expect(file.fullpath).to.be.a.file()
+        expect(file.fullpath).to.be.a.file().and.not.empty
         // ## Teardown
         fsSandbox.rmSync()
         // ## End
@@ -199,8 +199,8 @@ describe('fs-sandbox', function () {
             expect(files).to.be.an('array').with.lengthOf(2)
             expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
             expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-            expect(files[0].fullpath).to.be.a.file()
-            expect(files[1].fullpath).to.be.a.file()
+            expect(files[0].fullpath).to.be.a.file().and.not.empty
+            expect(files[1].fullpath).to.be.a.file().and.not.empty
             // ## Teardown
             fsSandbox.rmSync()
             // ## End
@@ -217,8 +217,8 @@ describe('fs-sandbox', function () {
             expect(files).to.be.an('array').with.lengthOf(2)
             expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
             expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-            expect(files[0].fullpath).to.be.a.file()
-            expect(files[1].fullpath).to.be.a.file()
+            expect(files[0].fullpath).to.be.a.file().and.not.empty
+            expect(files[1].fullpath).to.be.a.file().and.not.empty
             // ## Teardown
             fsSandbox.rmSync()
             // ## End
@@ -235,8 +235,8 @@ describe('fs-sandbox', function () {
           expect(files).to.have.lengthOf(2)
           expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
           expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-          expect(files[0].fullpath).to.be.a.file()
-          expect(files[1].fullpath).to.be.a.file()
+          expect(files[0].fullpath).to.be.a.file().and.not.empty
+          expect(files[1].fullpath).to.be.a.file().and.not.empty
           // ## Teardown
           fsSandbox.rmSync()
           // ## End

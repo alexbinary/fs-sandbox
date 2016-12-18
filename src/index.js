@@ -2,6 +2,8 @@
 let fs = require('fs')
 let path = require('path')
 
+let uuid = require('uuid/v4')
+
 let rimraf = require('alexbinary.rimraf')
 let mkdirp = require('alexbinary.mkdirp')
 let touchp = require('alexbinary.touchp')
@@ -102,14 +104,15 @@ function makeSandboxObject (fullpath) {
 
 function makeFile (sandboxpath, filepath) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
-  return touchp(fullpath).then(() => {
-    return makeFileObject(sandboxpath, fullpath)
-  })
+  return touchp(fullpath)
+  .then(() => promisify(fs.writeFile)(fullpath, getFileContent()))
+  .then(() => makeFileObject(sandboxpath, fullpath))
 }
 
 function makeFileSync (sandboxpath, filepath) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
   touchp.sync(fullpath)
+  fs.writeFileSync(fullpath, getFileContent())
   return makeFileObject(sandboxpath, fullpath)
 }
 
@@ -151,6 +154,10 @@ function getPathInSandbox (sandboxpath, filepath) {
 
 function getRmGlobablGlob () {
   return getSandboxBasePath() + '*'
+}
+
+function getFileContent () {
+  return uuid()
 }
 
 module.exports = fsSandbox

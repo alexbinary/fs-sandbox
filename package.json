@@ -22,6 +22,7 @@
     "alexbinary.promisify": "https://github.com/alexbinary/promisify.git",
     "alexbinary.rimraf": "https://github.com/alexbinary/rimraf.git",
     "alexbinary.touchp": "https://github.com/alexbinary/touchp.git",
-    "chai-fs": "^1.0.0"
+    "chai-fs": "^1.0.0",
+    "uuid": "^3.0.1"
   }
 }
