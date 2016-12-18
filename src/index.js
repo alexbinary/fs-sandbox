@@ -55,21 +55,21 @@ function makeSandboxObject (fullpath) {
     getPath (filepath) {
       return path.join(fullpath, filepath)
     },
-    touchp (filepath) {
+    touchp (filepath, filecontent) {
       if (typeof filepath === 'string') {
-        return makeFile(fullpath, filepath)
+        return makeFile(fullpath, filepath, filecontent)
       } else {
         return Promise.all(filepath.map((item) => {
-          return makeFile(fullpath, item)
+          return makeFile(fullpath, item, filecontent)
         }))
       }
     },
-    touchpSync (filepath) {
+    touchpSync (filepath, filecontent) {
       if (typeof filepath === 'string') {
-        return makeFileSync(fullpath, filepath)
+        return makeFileSync(fullpath, filepath, filecontent)
       } else {
         return filepath.map((item) => {
-          return makeFileSync(fullpath, item)
+          return makeFileSync(fullpath, item, filecontent)
         })
       }
     },
@@ -102,17 +102,17 @@ function makeSandboxObject (fullpath) {
   return obj
 }
 
-function makeFile (sandboxpath, filepath) {
+function makeFile (sandboxpath, filepath, filecontent) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
   return touchp(fullpath)
-  .then(() => fsWriteFilePromise(fullpath, getFileContent()))
+  .then(() => fsWriteFilePromise(fullpath, filecontent || getFileContent()))
   .then(() => makeFileObject(sandboxpath, fullpath))
 }
 
-function makeFileSync (sandboxpath, filepath) {
+function makeFileSync (sandboxpath, filepath, filecontent) {
   let fullpath = getPathInSandbox(sandboxpath, filepath)
   touchp.sync(fullpath)
-  fs.writeFileSync(fullpath, getFileContent())
+  fs.writeFileSync(fullpath, filecontent || getFileContent())
   return makeFileObject(sandboxpath, fullpath)
 }
 
