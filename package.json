@@ -11,7 +11,6 @@
     "testw": "mocha -w"
   },
   "devDependencies": {
-    "alexbinary.file-exists": "https://github.com/alexbinary/file-exists.git",
     "chai": "^3.5.0",
     "chai-string": "^1.3.0",
     "istanbul": "^0.4.5",
@@ -22,6 +21,7 @@
     "alexbinary.mkdirp": "https://github.com/alexbinary/mkdirp.git",
     "alexbinary.promisify": "https://github.com/alexbinary/promisify.git",
     "alexbinary.rimraf": "https://github.com/alexbinary/rimraf.git",
-    "alexbinary.touchp": "https://github.com/alexbinary/touchp.git"
+    "alexbinary.touchp": "https://github.com/alexbinary/touchp.git",
+    "chai-fs": "^1.0.0"
   }
 }

@@ -1,11 +1,11 @@
 
 let chai = require('chai')
 chai.use(require('chai-string'))
+chai.use(require('chai-fs'))
 
 let expect = chai.expect
 let path = require('path')
 
-let fileexists = require('alexbinary.file-exists')
 let fsSandbox = require('./../src/index')
 
 describe('fs-sandbox', function () {
@@ -35,7 +35,7 @@ describe('fs-sandbox', function () {
           // ## Assert
           expect(err).to.be.null
           expect(sandbox.fullpath).to.startWith(fsSandbox.getRoot())
-          expect(fileexists.sync(sandbox.fullpath)).to.be.true
+          expect(sandbox.fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -49,7 +49,7 @@ describe('fs-sandbox', function () {
         fsSandbox.new().then((sandbox) => {
           // ## Assert
           expect(sandbox.fullpath).to.startWith(fsSandbox.getRoot())
-          expect(fileexists.sync(sandbox.fullpath)).to.be.true
+          expect(sandbox.fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -62,7 +62,7 @@ describe('fs-sandbox', function () {
         let sandbox = fsSandbox.newSync()
         // ## Assert
         expect(sandbox.fullpath).to.startWith(fsSandbox.getRoot())
-        expect(fileexists.sync(sandbox.fullpath)).to.be.true
+        expect(sandbox.fullpath).to.be.a.path()
         // ## Teardown
         fsSandbox.rmSync()
         // ## End
@@ -77,7 +77,7 @@ describe('fs-sandbox', function () {
         fsSandbox.rm((err) => {
           // ## Assert
           expect(err).to.be.null
-          expect(fileexists.sync(sandbox.fullpath)).to.be.false
+          expect(sandbox.fullpath).to.not.be.a.path()
           // ## End
           done()
         })
@@ -89,7 +89,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         fsSandbox.rm().then(() => {
           // ## Assert
-          expect(fileexists.sync(sandbox.fullpath)).to.be.false
+          expect(sandbox.fullpath).to.not.be.a.path()
           // ## End
         }).then(() => done()).catch(done)
       })
@@ -100,7 +100,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         fsSandbox.rmSync()
         // ## Assert
-        expect(fileexists.sync(sandbox.fullpath)).to.be.false
+        expect(sandbox.fullpath).to.not.be.a.path()
         // ## End
       })
     })
@@ -152,7 +152,7 @@ describe('fs-sandbox', function () {
           // ## Assert
           expect(err).to.be.null
           expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-          expect(fileexists.sync(file.fullpath)).to.be.true
+          expect(file.fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -167,7 +167,7 @@ describe('fs-sandbox', function () {
         sandbox.touchp('foo/bar').then((file) => {
           // ## Assert
           expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-          expect(fileexists.sync(file.fullpath)).to.be.true
+          expect(file.fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -181,7 +181,7 @@ describe('fs-sandbox', function () {
         let file = sandbox.touchpSync('foo/bar')
         // ## Assert
         expect(file.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-        expect(fileexists.sync(file.fullpath)).to.be.true
+        expect(file.fullpath).to.be.a.path()
         // ## Teardown
         fsSandbox.rmSync()
         // ## End
@@ -198,8 +198,8 @@ describe('fs-sandbox', function () {
             expect(files).to.be.an('array').with.lengthOf(2)
             expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
             expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-            expect(fileexists.sync(files[0].fullpath)).to.be.true
-            expect(fileexists.sync(files[1].fullpath)).to.be.true
+            expect(files[0].fullpath).to.be.a.path()
+            expect(files[1].fullpath).to.be.a.path()
             // ## Teardown
             fsSandbox.rmSync()
             // ## End
@@ -216,8 +216,8 @@ describe('fs-sandbox', function () {
             expect(files).to.be.an('array').with.lengthOf(2)
             expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
             expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-            expect(fileexists.sync(files[0].fullpath)).to.be.true
-            expect(fileexists.sync(files[1].fullpath)).to.be.true
+            expect(files[0].fullpath).to.be.a.path()
+            expect(files[1].fullpath).to.be.a.path()
             // ## Teardown
             fsSandbox.rmSync()
             // ## End
@@ -234,8 +234,8 @@ describe('fs-sandbox', function () {
           expect(files).to.have.lengthOf(2)
           expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
           expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-          expect(fileexists.sync(files[0].fullpath)).to.be.true
-          expect(fileexists.sync(files[1].fullpath)).to.be.true
+          expect(files[0].fullpath).to.be.a.path()
+          expect(files[1].fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -252,7 +252,7 @@ describe('fs-sandbox', function () {
           // ## Assert
           expect(err).to.be.null
           expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-          expect(fileexists.sync(dir.fullpath)).to.be.true
+          expect(dir.fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -267,7 +267,7 @@ describe('fs-sandbox', function () {
         sandbox.mkdirp('foo/bar').then((dir) => {
           // ## Assert
           expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-          expect(fileexists.sync(dir.fullpath)).to.be.true
+          expect(dir.fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -281,7 +281,7 @@ describe('fs-sandbox', function () {
         let dir = sandbox.mkdirpSync('foo/bar')
         // ## Assert
         expect(dir.fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
-        expect(fileexists.sync(dir.fullpath)).to.be.true
+        expect(dir.fullpath).to.be.a.path()
         // ## Teardown
         fsSandbox.rmSync()
         // ## End
@@ -298,8 +298,8 @@ describe('fs-sandbox', function () {
             expect(files).to.be.an('array').with.lengthOf(2)
             expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
             expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-            expect(fileexists.sync(files[0].fullpath)).to.be.true
-            expect(fileexists.sync(files[1].fullpath)).to.be.true
+            expect(files[0].fullpath).to.be.a.path()
+            expect(files[1].fullpath).to.be.a.path()
             // ## Teardown
             fsSandbox.rmSync()
             // ## End
@@ -316,8 +316,8 @@ describe('fs-sandbox', function () {
             expect(files).to.be.an('array').with.lengthOf(2)
             expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
             expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-            expect(fileexists.sync(files[0].fullpath)).to.be.true
-            expect(fileexists.sync(files[1].fullpath)).to.be.true
+            expect(files[0].fullpath).to.be.a.path()
+            expect(files[1].fullpath).to.be.a.path()
             // ## Teardown
             fsSandbox.rmSync()
             // ## End
@@ -333,8 +333,8 @@ describe('fs-sandbox', function () {
           expect(files).to.be.an('array').with.lengthOf(2)
           expect(files[0].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/bar'))
           expect(files[1].fullpath).to.equal(path.join(sandbox.fullpath, 'foo/baz'))
-          expect(fileexists.sync(files[0].fullpath)).to.be.true
-          expect(fileexists.sync(files[1].fullpath)).to.be.true
+          expect(files[0].fullpath).to.be.a.path()
+          expect(files[1].fullpath).to.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -350,7 +350,7 @@ describe('fs-sandbox', function () {
         sandbox.rm((err) => {
           // ## Assert
           expect(err).to.be.null
-          expect(fileexists.sync(sandbox.fullpath)).to.be.false
+          expect(sandbox.fullpath).to.not.be.a.path()
           // ## End
           done()
         })
@@ -362,7 +362,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         sandbox.rm().then(() => {
           // ## Assert
-          expect(fileexists.sync(sandbox.fullpath)).to.be.false
+          expect(sandbox.fullpath).to.not.be.a.path()
           // ## End
         }).then(() => done()).catch(done)
       })
@@ -373,7 +373,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         sandbox.rmSync()
         // ## Assert
-        expect(fileexists.sync(sandbox.fullpath)).to.be.false
+        expect(sandbox.fullpath).to.not.be.a.path()
         // ## End
       })
     })
@@ -415,7 +415,7 @@ describe('fs-sandbox', function () {
         file.rm((err) => {
           // ## Assert
           expect(err).to.be.null
-          expect(fileexists.sync(file.fullpath)).to.be.false
+          expect(file.fullpath).to.not.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -430,7 +430,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         file.rm().then(() => {
           // ## Assert
-          expect(fileexists.sync(file.fullpath)).to.be.false
+          expect(file.fullpath).to.not.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -444,7 +444,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         file.rmSync()
         // ## Assert
-        expect(fileexists.sync(file.fullpath)).to.be.false
+        expect(file.fullpath).to.not.be.a.path()
         // ## Teardown
         fsSandbox.rmSync()
         // ## End
@@ -488,7 +488,7 @@ describe('fs-sandbox', function () {
         dir.rm((err) => {
           // ## Assert
           expect(err).to.be.null
-          expect(fileexists.sync(dir.fullpath)).to.be.false
+          expect(dir.fullpath).to.not.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -503,7 +503,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         dir.rm().then(() => {
           // ## Assert
-          expect(fileexists.sync(dir.fullpath)).to.be.false
+          expect(dir.fullpath).to.not.be.a.path()
           // ## Teardown
           fsSandbox.rmSync()
           // ## End
@@ -517,7 +517,7 @@ describe('fs-sandbox', function () {
         // ## TEST
         dir.rmSync()
         // ## Assert
-        expect(fileexists.sync(dir.fullpath)).to.be.false
+        expect(dir.fullpath).to.not.be.a.path()
         // ## Teardown
         fsSandbox.rmSync()
         // ## End
