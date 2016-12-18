@@ -187,7 +187,7 @@ describe('fs-sandbox', function () {
         fsSandbox.rmSync()
         // ## End
       })
-      describe('array', function () {
+      describe('with array', function () {
         it('callback', function (done) {
           // ## Setup
           fsSandbox.setRoot(__dirname)
@@ -287,7 +287,7 @@ describe('fs-sandbox', function () {
         fsSandbox.rmSync()
         // ## End
       })
-      describe('array', function () {
+      describe('with array', function () {
         it('callback', function (done) {
           // ## Setup
           fsSandbox.setRoot(__dirname)
